@@ -1,69 +1,105 @@
 # PBI_M_Replacing_Multiple_Values
-Some exemplos and code about how to replace multiple values on a table using list.accumulate
 
-## FUNCION 
+Some examples and M code showing how to replace multiple values in a table using `List.Accumulate` in Power Query (M language).
 
-list.accumulate()
+## FUNCTION FOCUS: `List.Accumulate()`
 
-  ### FUNCTION MS DOCUMENTATION
+### FUNCTION MS DOCUMENTATION
 
-  List.Accumulate(list as list, seed as any , accumulator as function) as any
+```m
+List.Accumulate(list as list, seed as any, accumulator as function) as any
+```
+
+### FUNCTION PARAMETERS
+
+1. **List**:  
+   A list of elements that the function will iterate through. Each item in the list is referred to as `current` during each iteration.
+
+2. **Seed (initial state)**:  
+   The value that will be transformed throughout the iterations. In this case, it's the table generated in the previous Power Query step.
+
+3. **Function** `(state, current) => ...`:  
+   - `state`: the accumulated result (starting as the seed and changing with each step).  
+   - `current`: the current item from the list being processed.
+
+---
+
+## PRACTICAL EXAMPLE 1
+
+Nielsen route names often change from one fiscal year to another.  
+To allow users to view historical data using the new route names, we need to **massively replace** the old values with the new ones.  
+Since the route name is not a primary key and is not used in data model relationships, this transformation is only needed in the `dim_routes` dimension table.
+
+### REQUIREMENTS
+
+- A table with two columns:
+  - `OLD AREA`: the values to be replaced
+  - `NEW AREA`: the new values to replace with
+
+<img width="325" height="182" alt="1_areas" src="https://github.com/user-attachments/assets/671b24ba-b324-4998-b3e1-73ef498594b6" />
+
+
+- `List.Accumulate` applied to the table generated in the previous Power Query step.
+
+<img width="953" height="202" alt="3_M_commented" src="https://github.com/user-attachments/assets/005db38b-5348-4517-8886-2012a3e7339d" />
+
+- `Table before correction by list.accumulate:`
+  <img width="571" height="301" alt="2_record_routes_area_ex1_OLD" src="https://github.com/user-attachments/assets/2cc49166-a00d-40d4-9242-6068e952c658" />
+
+-  `Table after correction by list.accumulate:`
+<img width="563" height="429" alt="2_record_routes_area_ex1_NEW" src="https://github.com/user-attachments/assets/7eb3ffc6-776c-4057-8fb6-049f7a700db4" />
+
+
+### DATASET FOR EXAMPLE 1
+
+[Areas_To_Change.xlsx](https://github.com/RafaellaRomer/PBI_M_Replacing_Multiple_Values/blob/main/Areas_To_Change.xlsx)
+
+### POWER BI WITH THE EXAMPLE
+
+*(Add screenshot or link here if available)*
+
+---
+
+## PRACTICAL EXAMPLE 2
+
+A small company uses a monthly Excel file to report sales by company.  
+Due to manual data entry, the same company may appear under different spellings.  
+To correctly report sales by company and date in Power BI, the names must be cleaned and unified.
+
+### REQUIREMENTS
+
+- A table with two columns:
+  - `Old Company Name`: incorrect or inconsistent spellings
+  - `New Company Name`: the correct spelling
+
   
-#1 - List: we will provide a resumen of the elements as list, this way the function can run along the items list applying the transformation we need. 
-          Each item of the list represents de "current" value on our function
+<img width="326" height="250" alt="4_companies_list_ex2" src="https://github.com/user-attachments/assets/df8e569a-4c2a-4cd7-8cdc-f8086216d659" />
 
-#2 - Seed (optional): where we will be applying the transformations. In this case is the table generated on the previous step
+- Apply `List.Accumulate` to clean the data using the replacement table.
 
-#3 - Function: (state, current) =>  transformations
-      WHERE:
-        state is
-        current is the item where we are on our list, applyng the function we declared
-        
-## PRACTICAL EXEMPLE 1 
+  <img width="405" height="207" alt="5_list_accumulate_ex2" src="https://github.com/user-attachments/assets/23b58568-ebc0-479c-83df-0d02a7444817" />
 
-The Nielsen route´s names are changed from one fiscal year to another.
-They need to see te historical data within the new rouetes names.
-We need to massively lookup the old values and replace then with the new values.
-As route isnt a primary key and isn't used for connections on the model, the step just need to be done on the dimension table dim_routes
+#### IMPORTANT: 
+When standardizing company names, it's important to choose the appropriate replacement method. Power Query provides both Replacer.ReplaceText and Replacer.ReplaceValue:
 
-### REQUIREMENTS 
+  - ReplaceText performs partial (substring) replacements.
+  - ReplaceValue replaces only exact (whole value) matches.
+  - 
+In this case, since we're standardizing full company names, Replacer.ReplaceValue is used to ensure only complete matches are replaced. It's worth keeping this distinction in mind when adapting or extending the logic.
 
-- A table with old_values column (to be replaced)  and new_values column (replace with)
+- `Table before correction by list.accumulate:`
+<img width="713" height="232" alt="6_sales_before_listaccumulate" src="https://github.com/user-attachments/assets/1a22e87a-6481-4e67-a56c-189a95fe9651" />
 
-  <img width="413" height="258" alt="nielsen_areas" src="https://github.com/user-attachments/assets/21443b42-fd84-45d1-b1c3-77b5b1e1b63d" />
-
-- List.Accumulate applied on the table created on the previous P Query step
-
-<img width="1076" height="207" alt="list_accumulate_areas" src="https://github.com/user-attachments/assets/dc62ecf6-3301-4bb5-bca3-72d9881f0d45" />
-
-### Dataset for the exemple 1
-
-src="https://github.com/RafaellaRomer/PBI_M_Replacing_Multiple_Values/blob/main/Areas_To_Change.xlsx"
-
-### Power BI with the exemple
-
-### M Code
+-  `Table after correction by list.accumulate:`
+<img width="716" height="677" alt="7_sales_after_listaccumulate_ex2" src="https://github.com/user-attachments/assets/1740e2d4-aab3-4275-9b28-9a1aa9280c66" />
 
 
+### DATASET FOR EXAMPLE 2
 
-## PRACTICAL EXEMPLE 2
+*(Insert link to dataset if available)*
 
-A small company uses a montly excel to report sales by company
-In consequences of this process the same company can have lots of differents spellings in the records.
-The name wrong spelled have to be corrected to correct show sales by date and company on Power BI.
-Soluntion: from a list wich has 2 columns, the wrong spell and right spell, massivily correct the company's names
+### POWER BI WITH THE EXAMPLE
 
-### Requirements
+*(Add screenshot or link here if available)*
 
-- A table with old_values (to be replaced) column and new_values column (replace with)
-
-- List.Accumulate applied on the table created on the previous P Query step
-
-  ### Dataset for the exemple 1
-
-### Power BI with the exemple
-
-### M Code
-
-
-
+---
