@@ -44,9 +44,11 @@ Since the route name is not a primary key and is not used in data model relation
 <img width="953" height="202" alt="3_M_commented" src="https://github.com/user-attachments/assets/005db38b-5348-4517-8886-2012a3e7339d" />
 
 - `Table before correction by list.accumulate:`
+- 
   <img width="571" height="301" alt="2_record_routes_area_ex1_OLD" src="https://github.com/user-attachments/assets/2cc49166-a00d-40d4-9242-6068e952c658" />
 
 -  `Table after correction by list.accumulate:`
+-  
 <img width="563" height="429" alt="2_record_routes_area_ex1_NEW" src="https://github.com/user-attachments/assets/7eb3ffc6-776c-4057-8fb6-049f7a700db4" />
 
 
@@ -71,7 +73,6 @@ To correctly report sales by company and date in Power BI, the names must be cle
 - A table with two columns:
   - `Old Company Name`: incorrect or inconsistent spellings
   - `New Company Name`: the correct spelling
-
   
 <img width="326" height="250" alt="4_companies_list_ex2" src="https://github.com/user-attachments/assets/df8e569a-4c2a-4cd7-8cdc-f8086216d659" />
 
@@ -96,10 +97,10 @@ In this case, since we're standardizing full company names, Replacer.ReplaceValu
 
 ### DATASET FOR EXAMPLE 2
 
-*(Insert link to dataset if available)*
+[Ex2_companys_sales_2025.xlsx](https://github.com/RafaellaRomer/PBI_M_Replacing_Multiple_Values/blob/5755d658f77b6af2748465c6a962aa1995a148c3/Ex2_companys_sales_2025.xlsx)
 
 ### POWER BI WITH THE EXAMPLE
 
-*(Add screenshot or link here if available)*
+[List_Accumulate_up.pbix](https://github.com/RafaellaRomer/PBI_M_Replacing_Multiple_Values/blob/5755d658f77b6af2748465c6a962aa1995a148c3/List_Accumulate_up.pbix)
 
 ---
