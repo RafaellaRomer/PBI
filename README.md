@@ -27,16 +27,6 @@ list.accumulate()
         current is the item where we are on our list, applyng the function we declared
         
 
-    - 
-
-    - List
-    ZonasRef_Corregidas = List.Accumulate(
-    {0..List.Count(Zonas_ref[ANTÍGUA Nielsen Area])-1}, 
-  // lista da cantidad de valores que tenemos en nuestra tabla de zonas para sere cambiadas. 
-// Es También el "current" de la función que vamos aplicar. A cada indice, vamos buscar en current el valor con este indice de la columna antigua y vamos a reemplaxzar con el valor con este indice de la columna NUEVA de la tabla de zonas 
-    #"Texto recortado", // seed, y tambien el "state" dde la funcion que vamos utilizar. Donde vamos aplicar los cambios
-    (state, current) => Table.ReplaceValue(state,Zonas_ref[ANTÍGUA Nielsen Area]{current},Zonas_ref[NUEVA Nielsen Area]{current},Replacer.ReplaceText,{"Nielsen Area"}) // esta es sencillamente  la funcion intrinseca de replace valules, con variables sustituidas por lo que nos pide la funcio list.accumulate() 
-)
 
 ### REQUIREMENTS 
 
@@ -44,3 +34,6 @@ list.accumulate()
 
   <img width="413" height="258" alt="nielsen_areas" src="https://github.com/user-attachments/assets/21443b42-fd84-45d1-b1c3-77b5b1e1b63d" />
 
+- List.Accumulate applied on the table created on the previous P Query step
+
+<img width="1076" height="207" alt="list_accumulate_areas" src="https://github.com/user-attachments/assets/dc62ecf6-3301-4bb5-bca3-72d9881f0d45" />
