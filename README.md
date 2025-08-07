@@ -38,6 +38,8 @@ As route isnt a primary key and isn't used for connections on the model, the ste
 
 ### Dataset for the exemple 1
 
+src="https://github.com/RafaellaRomer/PBI_M_Replacing_Multiple_Values/blob/main/Areas_To_Change.xlsx"
+
 ### Power BI with the exemple
 
 ### M Code
