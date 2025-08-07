@@ -28,7 +28,7 @@ As route isnt a primary key and isn't used for connections on the model, the ste
 
 ### REQUIREMENTS 
 
-- A table with old_values (to be replaced) column and new_values column (replace with)
+- A table with old_values column (to be replaced)  and new_values column (replace with)
 
   <img width="413" height="258" alt="nielsen_areas" src="https://github.com/user-attachments/assets/21443b42-fd84-45d1-b1c3-77b5b1e1b63d" />
 
