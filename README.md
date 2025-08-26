@@ -104,3 +104,38 @@ In this case, since we're standardizing full company names, Replacer.ReplaceValu
 [List_Accumulate_up.pbix](https://github.com/RafaellaRomer/PBI_M_Replacing_Multiple_Values/blob/5755d658f77b6af2748465c6a962aa1995a148c3/List_Accumulate_up.pbix)
 
 ---
+
+## NEW PRACTICAL USE - REPLACING VALUES IN MULTIPLE COLUMNS:
+
+- `TO REPLACE / REPLACE WITH TABLE`
+- 
+  <img width="357" height="598" alt="prod_toreplace_replacewith" src="https://github.com/user-attachments/assets/5d5ccb8e-6f15-48df-a77d-2a0c31db686f" />
+
+- `Input table`
+- 
+  <img width="367" height="407" alt="input_table" src="https://github.com/user-attachments/assets/9a56139b-5118-46eb-ad31-a0dea429d7d6" />
+
+- `Output table`
+- 
+<img width="376" height="412" alt="output_table" src="https://github.com/user-attachments/assets/f81fa20f-e184-431c-8336-f63813fb834a" />
+
+- `M CODE`
+- 
+  ```m
+= List.Accumulate(
+
+        {0..List.Count(prod_old_new[TO REPLACE])-1},
+        Tipo_cambiado,
+        (state, current) =>
+         Table.ReplaceValue(   state,
+            prod_old_new[TO REPLACE]{current},
+            prod_old_new[REPLACE WITH]{current},
+            Replacer.ReplaceValue,
+            {
+            "COL1 SELECCIONA EL PRODUCTO",
+             "COL2, SELECCIONA EL PRODUCTO",
+             "COL3, SELECCIONA EL PRODUCTO"
+             }
+        )
+    )
+```
