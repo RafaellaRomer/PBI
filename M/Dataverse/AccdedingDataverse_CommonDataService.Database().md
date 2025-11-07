@@ -1,4 +1,4 @@
-# Understanding `AccedingDataverse_CommonDataService.Database()` in Power Query
+# `AccedingDataverse_CommonDataService.Database()` in Power Query
 
 This guide provides a **complete explanation and practical examples** of the function `AccedingDataverse_CommonDataService.Database()` — used to connect Power Query (Power BI or Excel) to **Microsoft Dataverse** environments.
 
