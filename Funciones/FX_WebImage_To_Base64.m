@@ -8,11 +8,39 @@
 fx_webImg_toBase64 = (tabela as table) as table =>
        let
            web_contents = Table.AddColumn(tabela, "Column_Name1", each Web.Contents([Col_Contains_Image_Link])),  
-           binary_toText = Table.AddColumn(web_contents, "Column_Name2", each "data:image/png;base64, " & Binary.ToText([Icon_Web], BinaryEncoding.Base64)),
+           binary_toText = Table.AddColumn(web_contents, "Column_Name2", each "data:image/png;base64, " & Binary.ToText([Column_Name1], BinaryEncoding.Base64)),
            quita_col = Table.RemoveColumns(binary_toText, {"Column_Name1", "Col_Contains_Image_Link"})
        in
            quita_col
 
 
-// put conditions to not return return errors
+// put conditions to not return return errors in case of empty fields
 
+Col_Contains_Image_Link
+
+= (tabela as table) as table =>
+
+        let
+
+            web_contents = Table.AddColumn(tabela, "Column_Name1", each 
+
+                                if [Col_Contains_Image_Link] <> null then Web.Contents([Col_Contains_Image_Link])
+
+                                 else null
+
+                            ),
+
+            binary_toText = Table.AddColumn(web_contents, "Column_Name2", each 
+
+                                if [Icon_Web] <> null then "data:image/png;base64, " & Binary.ToText([Column_Name1], BinaryEncoding.Base64)
+
+                                else null
+
+                            ),
+
+            quita_col = Table.RemoveColumns(binary_toText, {"Column_Name1", "Col_Contains_Image_Link"})
+
+        in
+
+            quita_col
+ 
