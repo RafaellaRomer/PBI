@@ -1,1 +1,2 @@
+## List Accumulate Structure
 
